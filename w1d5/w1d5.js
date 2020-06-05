@@ -1,10 +1,58 @@
-
 class SLL {
     constructor() {
         this.head = null;
-        this.length = 0;
     }
 
+    reverse() {
+        var prev = null;
+        var current = this.head;
+        var next = null;
+        while (current) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        this.head = prev;
+    }
+
+    nthFromLast(n) {
+        if (this.head === null) {
+            return this.head;
+        }
+        var runnerFast = this.head;
+        var runnerSlow = this.head;
+        var count = 0;
+        while (runnerFast) {
+            if (count >= n) {
+                runnerSlow = runnerSlow.next;
+            }
+            runnerFast = runnerFast.next;
+            count++;
+        }
+        return runnerSlow;
+    }
+
+    nthFromLast2(n) {
+        if (this.head === null) {
+            return this.head;
+        }
+        var runner = this.head;
+        while (n > 0) {
+            runner = runner.next;
+            n--;
+        }
+        var secondRunner = this.head;
+        while (runner) {
+            runner = runner.next;
+            secondRunner = secondRunner.next;
+        }
+        return secondRunner;
+    }
+
+
+
+    // *
     //iterate the linked list and print the value of every node
     display(){
         var runner = this.head;
@@ -14,7 +62,7 @@ class SLL {
         }
     }
 
-
+    // *
     //if data is contained within the current list, remove it.
     //consider edge cases of head node, last node, and middle nodes
     delete(data) {
@@ -38,19 +86,19 @@ class SLL {
         prev.next = runner.next;
     }
 
+    // *
     addToFront(node){
         if(this.isEmpty()){
             this.head = node;
-            this.length++;
             return;
         };
 
         node.next = this.head;
         this.head = node;
-        this.length++;
         return;
     }
 
+    // *
     isEmpty(){
         if(this.head){
             return false;
@@ -58,6 +106,7 @@ class SLL {
         return true;
     }
 
+    // x
     addToBack(node){
         // create a runner at the head
         let runner = this.head;
@@ -65,7 +114,6 @@ class SLL {
         // check if the runner is null, meaning our list is headless
         if(runner === null){
             this.head = node;
-            this.length++;
             return
         }
 
@@ -78,7 +126,6 @@ class SLL {
             if(runner.next === null){
                 // if so, add here and return
                 runner.next = node;
-                this.length++;
                 return
             }
             // if not, advance runner
@@ -86,6 +133,7 @@ class SLL {
         }
     }
 
+    // *
     contains(value){
         // start at the head
         var runner = this.head;
@@ -104,6 +152,7 @@ class SLL {
         return false;
     }
 
+    // =
     recursiveContains(current, value){
         // if you didn't pass current, current should be the head
         if(current === undefined) current = this.head;
@@ -118,14 +167,13 @@ class SLL {
         return this.recursiveContains(current.next, value);
     }
 
+    // *
     // remove and return the first node from the list or null
     removeHead(){
         if(this.isEmpty()) return null;
-
         var removed = this.head;
         this.head = this.head.next;
         removed.next = null;
-        this.length--;
         return removed;
     }
 
@@ -135,10 +183,10 @@ class SLL {
 
         var removed = this.head;
         this.head = this.head.next;
-        this.length--;
         return removed.value;
     }
 
+    // x
     // remove and return the last node from the list or null
     removeBack(){
         if(this.isEmpty()) return null;
@@ -150,23 +198,12 @@ class SLL {
         while(current){
             if(current.next === null){
                 prev.next = null;
-                this.length--;
                 return current;
             }
             prev = current;
             current = current.next;
         }
     }
-
-    // bonus challenge:
-    // return the average of all values in an interger SLL
-    average(){
-
-    }
-    // get the value of the middle node if there is one
-    getMiddleData(){}
-
-    count(){}
 }
 
 class Node {
@@ -176,14 +213,14 @@ class Node {
     }
 }
 
-var mySLL = new SLL();
+// var mySLL = new SLL();
 
 
-mySLL.addToFront(new Node(7));
+// mySLL.addToFront(new Node(7));
 
 
-var myNewNode = new Node(8);
-mySLL.addToFront(myNewNode);
+// var myNewNode = new Node(8);
+// mySLL.addToFront(myNewNode);
 
-var bool = mySLL.isEmpty();
-console.log(bool);
+// var bool = mySLL.isEmpty();
+// console.log(bool);

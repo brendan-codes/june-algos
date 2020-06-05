@@ -1,9 +1,76 @@
+//Sam Dathan,Victoria
 
 class SLL {
     constructor() {
         this.head = null;
-        this.length = 0;
     }
+
+    reverse(){
+        var current = this.head;
+        var array = [];
+        while(current != null){
+            array.push(current);
+            current = current.next;
+        }
+        for(var i = array.length-1; i >= 1; i--){
+            array[i].next = array[i-1];
+        }
+        array[0].next = null;
+        this.head = array[array.length-1];
+    }
+
+    reverseOnce(){
+        var current = this.head;
+        var prev = null;
+        var next = current.next;
+        while(next != null){
+            current.next = prev;
+            prev = current;
+            current = next;
+            next = next.next;
+        }
+        this.head = current;
+    }
+    // reverse the order of a singly linked list.
+
+    // if the order is head -> 1 -> 2 -> 3 -> null
+    // the result will be head -> 3 -> 2 -> 1 -> null
+
+    // first solve this any way that you can, possibly using
+    // a different data structure as storage
+
+    // once you have a working solution, how could you refactor
+    // your code to only traverse the list once?
+
+
+    nthToLast(n){
+        var current = this.head;
+        var array = [];
+        while(current != null){
+            array.push(current);
+            current = current.next;
+        }
+        return array[array.length-1-n];
+    }
+    //traverse sll till end,
+    //set a pointer =length-1-n
+    //return pointer val
+
+    // return the nth to the last node. assume you do not have a count() method
+    // first get a working solution
+
+    // assume n is within range of the list
+
+    // once you solve it, how could you refactor your code to only
+    // traverse the list one time?
+
+
+ function ShrinkStr(str, n){
+     String
+
+     ArrayList
+ }
+
 
     //iterate the linked list and print the value of every node
     display(){
@@ -13,7 +80,6 @@ class SLL {
             runner = runner.next;
         }
     }
-
 
     //if data is contained within the current list, remove it.
     //consider edge cases of head node, last node, and middle nodes
@@ -41,13 +107,11 @@ class SLL {
     addToFront(node){
         if(this.isEmpty()){
             this.head = node;
-            this.length++;
             return;
         };
 
         node.next = this.head;
         this.head = node;
-        this.length++;
         return;
     }
 
@@ -65,7 +129,6 @@ class SLL {
         // check if the runner is null, meaning our list is headless
         if(runner === null){
             this.head = node;
-            this.length++;
             return
         }
 
@@ -78,7 +141,6 @@ class SLL {
             if(runner.next === null){
                 // if so, add here and return
                 runner.next = node;
-                this.length++;
                 return
             }
             // if not, advance runner
@@ -125,7 +187,6 @@ class SLL {
         var removed = this.head;
         this.head = this.head.next;
         removed.next = null;
-        this.length--;
         return removed;
     }
 
@@ -135,7 +196,6 @@ class SLL {
 
         var removed = this.head;
         this.head = this.head.next;
-        this.length--;
         return removed.value;
     }
 
@@ -150,23 +210,12 @@ class SLL {
         while(current){
             if(current.next === null){
                 prev.next = null;
-                this.length--;
                 return current;
             }
             prev = current;
             current = current.next;
         }
     }
-
-    // bonus challenge:
-    // return the average of all values in an interger SLL
-    average(){
-
-    }
-    // get the value of the middle node if there is one
-    getMiddleData(){}
-
-    count(){}
 }
 
 class Node {
@@ -176,14 +225,14 @@ class Node {
     }
 }
 
-var mySLL = new SLL();
+// var mySLL = new SLL();
 
 
-mySLL.addToFront(new Node(7));
+// mySLL.addToFront(new Node(7));
 
 
-var myNewNode = new Node(8);
-mySLL.addToFront(myNewNode);
+// var myNewNode = new Node(8);
+// mySLL.addToFront(myNewNode);
 
-var bool = mySLL.isEmpty();
-console.log(bool);
+// var bool = mySLL.isEmpty();
+// console.log(bool);
